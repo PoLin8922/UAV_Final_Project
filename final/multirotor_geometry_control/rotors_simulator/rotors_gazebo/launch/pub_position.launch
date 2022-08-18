@@ -1,0 +1,8 @@
+<launch>
+
+  <node pkg="rotors_gazebo" type="/iris_leader/command/trajectory" name="/iris_leader/command/trajectory" 
+     args="pub /iris_leader/command/trajectory trajectory_msgs/MultiDOFJointTrajectory -l -f $(find rotors_gazebo)/position.yaml" output="screen" /> 
+
+</launch>
+
+

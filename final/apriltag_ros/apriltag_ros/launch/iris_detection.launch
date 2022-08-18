@@ -1,0 +1,71 @@
+<launch>
+  <arg name="launch_prefix" default="" /> <!-- set to value="gdbserver localhost:10000" for remote debugging -->
+  <arg name="node_namespace1" default="apriltag_ros_continuous_node_1" />
+  <arg name="node_namespace2" default="apriltag_ros_continuous_node_2" />
+  <arg name="node_namespace3" default="apriltag_ros_continuous_node_3" />
+  <arg name="node_namespace4" default="apriltag_ros_continuous_node_4" />
+  <arg name="uav_name1" default="iris_leader1" />
+  <arg name="uav_name2" default="iris_leader2" />
+  <arg name="uav_name3" default="iris_follower1" />
+  <arg name="uav_name4" default="iris_follower2" />
+  <arg name="camera_name" default="/vi_sensor/left" />
+  <arg name="image_topic" default="/image_raw" />
+  <arg name="camera_info" default="/camera_info" />
+  
+  
+  <rosparam command="load" file="$(find apriltag_ros)/config/settings.yaml" ns="$(arg node_namespace1)" />
+  <rosparam command="load" file="$(find apriltag_ros)/config/tags.yaml" ns="$(arg node_namespace1)" />
+
+  <node pkg="apriltag_ros" type="apriltag_ros_continuous_node" name="$(arg node_namespace1)" clear_params="true" output="screen" launch-prefix="$(arg launch_prefix)" >
+    <!-- Remap topics from those used in code to those on the ROS network -->
+    <remap from="image_rect" to="$(arg uav_name1)/$(arg camera_name)/$(arg image_topic)" />
+    <remap from="camera_info" to="$(arg uav_name1)/$(arg camera_name)/camera_info" />
+    <remap from="tag_detections_uav" to="tag_detections/$(arg uav_name1)" />
+
+    <param name="publish_tag_detections_image" type="bool" value="true" />      <!-- default: false -->
+  </node>
+
+
+  <rosparam command="load" file="$(find apriltag_ros)/config/settings.yaml" ns="$(arg node_namespace2)" />
+  <rosparam command="load" file="$(find apriltag_ros)/config/tags.yaml" ns="$(arg node_namespace2)" />
+
+  <node pkg="apriltag_ros" type="apriltag_ros_continuous_node" name="$(arg node_namespace2)" clear_params="true" output="screen" launch-prefix="$(arg launch_prefix)" >
+    <!-- Remap topics from those used in code to those on the ROS network -->
+    <remap from="image_rect" to="$(arg uav_name2)/$(arg camera_name)/$(arg image_topic)" />
+    <remap from="camera_info" to="$(arg uav_name2)/$(arg camera_name)/camera_info" />
+    <remap from="tag_detections_uav" to="tag_detections/$(arg uav_name2)" />
+
+    <param name="publish_tag_detections_image" type="bool" value="true" />      <!-- default: false -->
+  </node>
+
+
+  <rosparam command="load" file="$(find apriltag_ros)/config/settings.yaml" ns="$(arg node_namespace3)" />
+  <rosparam command="load" file="$(find apriltag_ros)/config/tags.yaml" ns="$(arg node_namespace3)" />
+
+  <node pkg="apriltag_ros" type="apriltag_ros_continuous_node" name="$(arg node_namespace3)" clear_params="true" output="screen" launch-prefix="$(arg launch_prefix)" >
+    <!-- Remap topics from those used in code to those on the ROS network -->
+    <remap from="image_rect" to="$(arg uav_name3)/$(arg camera_name)/$(arg image_topic)" />
+    <remap from="camera_info" to="$(arg uav_name3)/$(arg camera_name)/camera_info" />
+    <remap from="tag_detections_uav" to="tag_detections/$(arg uav_name3)" />
+
+    <param name="publish_tag_detections_image" type="bool" value="true" />      <!-- default: false -->
+  </node>
+
+
+  <rosparam command="load" file="$(find apriltag_ros)/config/settings.yaml" ns="$(arg node_namespace4)" />
+  <rosparam command="load" file="$(find apriltag_ros)/config/tags.yaml" ns="$(arg node_namespace4)" />
+
+  <node pkg="apriltag_ros" type="apriltag_ros_continuous_node" name="$(arg node_namespace4)" clear_params="true" output="screen" launch-prefix="$(arg launch_prefix)" >
+    <!-- Remap topics from those used in code to those on the ROS network -->
+    <remap from="image_rect" to="$(arg uav_name4)/$(arg camera_name)/$(arg image_topic)" />
+    <remap from="camera_info" to="$(arg uav_name4)/$(arg camera_name)/camera_info" />
+    <remap from="tag_detections_uav" to="tag_detections/$(arg uav_name4)" />
+
+    <param name="publish_tag_detections_image" type="bool" value="true" />      <!-- default: false -->
+  </node>
+
+ 
+ 
+
+
+</launch>
